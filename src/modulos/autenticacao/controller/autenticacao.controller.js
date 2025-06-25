@@ -94,11 +94,7 @@ class AutenticacaoController {
   }
   static async sair(req, res) {
     try {
-      res.clearCookies("refreshToken", {
-        httpOnly: false,
-        secure: process.env.NODE_ENV,
-        sameStrict: "strict",
-      });
+      res.status(200).json({msg: "Logout realizado com sucesso"})
     } catch (error) {
         res.status(500).json({msg: 'Erro interno do servidor. Por favor, tente mais tarde.', erro: error.message})
     }
