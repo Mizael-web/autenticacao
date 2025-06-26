@@ -1,15 +1,48 @@
 # Sistema de Autenticação de Alunos
-![Version](https://img.shields.io/badge/version-1.0.0-blue)
-![License](https://img.shields.io/badge/license-ISC-green)
-![Node.js CI](https://img.shields.io/badge/build-passing-brightgreen)
-[![npm version](https://img.shields.io/npm/v/autenticacao.svg)](https://www.npmjs.com/package/autenticacao)
-[![Dependencies](https://img.shields.io/david/username/repo.svg)](https://david-dm.org/username/repo)
-[![Last Commit](https://img.shields.io/github/last-commit/username/repo.svg)]
-[![Contributors](https://img.shields.io/github/contributors/username/repo.svg)]
-[![Issues](https://img.shields.io/github/issues/username/repo.svg)]
-[![Pull Requests](https://img.shields.io/github/issues-pr/username/repo.svg)]
- 
- Este é um sistema completo de autenticação e gerenciamento de alunos desenvolvido em Node.js com Express, utilizando PostgreSQL como banco de dados e JWT para autenticação.
+
+## 📈 Status do Projeto
+
+- Versão: 1.0.0
+- Estado: Em desenvolvimento
+- Última atualização: 25 de junho de 2025
+
+## ⚙️ Pré-requisitos
+
+- Node.js v16 ou superior
+- npm ou yarn
+- PostgreSQL v12 ou superior
+
+## 📦 Coleção de API
+
+Importe o arquivo `autenticacao.postman_collection.json` no Postman para testar todos os endpoints.
+
+## 🚀 Sumário de Endpoints
+
+| Método | Rota               | Descrição                            |
+|--------|--------------------|--------------------------------------|
+| GET    | /api/perfil        | Retorna perfil do aluno (protegido)  |
+| POST   | /api/cadastrar     | Cadastra um novo aluno               |
+| POST   | /api/login         | Autentica usuário e gera tokens      |
+| POST   | /api/refress-token | Renova access token (refresh)        |
+| POST   | /api/logout        | Logout e limpa o refresh token       |
+
+## 🔄 Fluxo de Autenticação (Mermaid)
+
+```mermaid
+sequenceDiagram
+    participant C as Cliente
+    participant S as Servidor
+    C->>S: POST /api/login + credenciais
+    S-->>C: accessToken + refreshToken(cookie)
+    C->>S: GET /api/perfil with Bearer accessToken
+    S-->>C: dados do perfil
+    C->>S: POST /api/refress-token (cookie)
+    S-->>C: novo accessToken
+    C->>S: POST /api/logout
+    S-->>C: confirmação de logout
+```
+
+Este é um sistema completo de autenticação e gerenciamento de alunos desenvolvido em Node.js com Express, utilizando PostgreSQL como banco de dados e JWT para autenticação.
 
 ## 📋 Índice
 
