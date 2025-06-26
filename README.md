@@ -2,6 +2,12 @@
 ![Version](https://img.shields.io/badge/version-1.0.0-blue)
 ![License](https://img.shields.io/badge/license-ISC-green)
 ![Node.js CI](https://img.shields.io/badge/build-passing-brightgreen)
+[![npm version](https://img.shields.io/npm/v/autenticacao.svg)](https://www.npmjs.com/package/autenticacao)
+[![Dependencies](https://img.shields.io/david/username/repo.svg)](https://david-dm.org/username/repo)
+[![Last Commit](https://img.shields.io/github/last-commit/username/repo.svg)]
+[![Contributors](https://img.shields.io/github/contributors/username/repo.svg)]
+[![Issues](https://img.shields.io/github/issues/username/repo.svg)]
+[![Pull Requests](https://img.shields.io/github/issues-pr/username/repo.svg)]
  
  Este é um sistema completo de autenticação e gerenciamento de alunos desenvolvido em Node.js com Express, utilizando PostgreSQL como banco de dados e JWT para autenticação.
 
