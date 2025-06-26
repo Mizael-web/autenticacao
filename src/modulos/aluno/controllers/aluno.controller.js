@@ -19,13 +19,24 @@ class AlunoController {
   }
   static async perfil(req, res) {
     try {
-      const aluno = await Aluno.findAll();
+      const { matricula } = req.usuario; // vindo do token
+
+      // Busca mais dados se necessário
+      const aluno = await Aluno.findOne({
+        where: { matricula },
+        attributes: ['nome', 'matricula', 'email'], // apenas os campos públicos
+      });
+
       if (!aluno) {
-        return res.status(401).json({ msg: "Não existe aluno cadastrado!" });
+        return res.status(404).json({ msg: "Aluno não encontrado." });
       }
-      res.status(200).json(aluno);
+
+      res.status(200).json({ perfil: aluno });
     } catch (error) {
-        res.status(500).json({msg: 'Erro do servidor. Tente novamente mais tarde!'})
+      res.status(500).json({
+        msg: "Erro ao buscar perfil.",
+        erro: error.message
+      });
     }
   }
 }

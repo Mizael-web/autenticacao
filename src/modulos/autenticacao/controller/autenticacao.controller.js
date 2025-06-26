@@ -42,8 +42,10 @@ class AutenticacaoController {
       }
       const dadosAluno = {
         nome: usuario.nome,
+        matricula: usuario.matricula, // Adicione isso
         papel: "aluno",
       };
+
       // gerando os tokens
       const tokenAcesso = AutenticacaoController.gerarTokenAcesso(dadosAluno);
       const refreshToken = AutenticacaoController.gerarRefressToken(dadosAluno);
@@ -83,8 +85,10 @@ class AutenticacaoController {
         }
         const dadosAluno = {
           nome: usuario.nome,
+          matricula: usuario.matricula, // Adicione isso
           papel: "aluno",
         };
+
         // gerando o novo token
         const novoTokenAcesso = this.gerarTokenAcesso(dadosAluno);
         // atualizando o token antigo para o novo
@@ -94,9 +98,17 @@ class AutenticacaoController {
   }
   static async sair(req, res) {
     try {
-      res.status(200).json({msg: "Logout realizado com sucesso"})
+      res.clearCookie("refreshToken", {
+        httpOnly: true,
+        secure: process.env.NODE_ENV === "development",
+        sameSite: "strict",
+      });
+      res.status(200).json({ msg: "Logout realizado com sucesso" });
     } catch (error) {
-        res.status(500).json({msg: 'Erro interno do servidor. Por favor, tente mais tarde.', erro: error.message})
+      res.status(500).json({
+        msg: "Erro interno do servidor. Por favor, tente mais tarde.",
+        erro: error.message,
+      });
     }
   }
 }
