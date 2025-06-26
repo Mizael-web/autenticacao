@@ -1,6 +1,9 @@
 # Sistema de Autenticação de Alunos
-
-Este é um sistema completo de autenticação e gerenciamento de alunos desenvolvido em Node.js com Express, utilizando PostgreSQL como banco de dados e JWT para autenticação.
+![Version](https://img.shields.io/badge/version-1.0.0-blue)
+![License](https://img.shields.io/badge/license-ISC-green)
+![Node.js CI](https://img.shields.io/badge/build-passing-brightgreen)
+ 
+ Este é um sistema completo de autenticação e gerenciamento de alunos desenvolvido em Node.js com Express, utilizando PostgreSQL como banco de dados e JWT para autenticação.
 
 ## 📋 Índice
 
@@ -104,6 +107,22 @@ SECRET_KEY=sua_chave_secreta_aqui
 JWT_REFRESH_SECRET=sua_chave_refresh_aqui
 ```
 
+### Variáveis de Ambiente
+
+| Variável             | Descrição                                      | Exemplo               |
+|----------------------|------------------------------------------------|-----------------------|
+| DB_USER              | Usuário do banco PostgreSQL                    | postgres              |
+| DB_HOST              | Host do banco                                  | localhost             |
+| DB_DATABASE          | Nome do banco de dados                         | autenticacao_db       |
+| DB_PASSWORD          | Senha do banco                                 | senha_segura          |
+| DB_PORT              | Porta do banco                                 | 5432                  |
+| PORTA                | Porta em que o servidor Express irá rodar      | 3001                  |
+| NODE_ENV             | Ambiente da aplicação                          | development           |
+| TEMPO_ACESS_TOKEN    | Duração do Access Token (JWT)                  | 2m                    |
+| TEMPO_REFRESH_TOKEN  | Duração do Refresh Token (JWT)                 | 24h                   |
+| SECRET_KEY           | Chave secreta para assinatura do Access Token  | sua_chave_secreta     |
+| JWT_REFRESH_SECRET   | Chave secreta para assinatura do Refresh Token | sua_chave_refresh     |
+
 ## 🚀 Instalação
 
 1. **Clone o repositório**:
@@ -123,7 +142,18 @@ npm install
 
 4. **Execute o servidor**:
 ```bash
-node index.js
+npm start
+```
+
+Adicionar scripts no pacote para facilitar:
+```jsonc
+// package.json
+{
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js"
+  }
+}
 ```
 
 O servidor estará rodando em `http://localhost:3001`
@@ -138,33 +168,31 @@ O servidor estará rodando em `http://localhost:3001`
 4. **Renovação de token**: Utiliza o refresh token para obter novos access tokens
 5. **Logout**: Remove o refresh token dos cookies
 
-## 🔌 API Endpoints
+### Exemplos com cURL
 
-### Rotas Públicas
+#### Cadastro de Aluno (cURL)
+ ```http
+ POST /api/cadastrar
+ Content-Type: application/json
 
-#### Cadastro de Aluno
-```http
-POST /api/cadastrar
-Content-Type: application/json
+ {
+   "nome": "João Silva",
+   "matricula": "A12345678",
+   "email": "joao@email.com",
+   "senha": "MinhaSenh@123"
+ }
+ ```
 
-{
-  "nome": "João Silva",
-  "matricula": "A12345678",
-  "email": "joao@email.com",
-  "senha": "MinhaSenh@123"
-}
-```
+#### Login (cURL)
+ ```http
+ POST /api/login
+ Content-Type: application/json
 
-#### Login
-```http
-POST /api/login
-Content-Type: application/json
-
-{
-  "matricula": "A12345678",
-  "senha": "MinhaSenh@123"
-}
-```
+ {
+   "matricula": "A12345678",
+   "senha": "MinhaSenh@123"
+ }
+ ```
 
 **Resposta de sucesso:**
 ```json
@@ -176,12 +204,12 @@ Content-Type: application/json
 }
 ```
 
-#### Logout
+#### Logout (cURL)
 ```http
 POST /api/logout
 ```
 
-#### Renovar Token
+#### Renovar Token (cURL)
 ```http
 POST /api/refress-token
 ```
@@ -394,9 +422,18 @@ Todas as respostas de erro incluem mensagens descritivas para facilitar debuggin
 7. **Cache**: Implementar cache Redis para tokens
 8. **Notificações**: Sistema de notificações por email
 
-## 📞 Suporte
+## 🤝 Contribuição
 
-Para dúvidas ou sugestões sobre este projeto, entre em contato através dos canais apropriados.
+Contribuições são bem-vindas! Para contribuir:
+1. Faça um fork do repositório
+2. Crie uma branch para sua feature (`git checkout -b feature/nova-funcionalidade`)
+3. Realize suas alterações e commit (`git commit -m 'Add nova funcionalidade'`)
+4. Envie para o repositório remoto (`git push origin feature/nova-funcionalidade`)
+5. Abra um Pull Request
+
+## 📄 Licença
+
+Este projeto está licenciado sob a licença ISC. Consulte o arquivo [LICENSE](LICENSE) para mais detalhes.
 
 ---
 
