@@ -10,4 +10,5 @@ router.post('/cadastrar', AlunoController.cadastrar)
 // rota protegida para exibir perfil do aluno
 router.get('/perfil', AutenticacaoMiddleware.autenticarToken, AlunoController.perfil);
 
+
 module.exports = router

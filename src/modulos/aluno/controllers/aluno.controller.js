@@ -1,5 +1,6 @@
 const Aluno = require("../models/aluno.model");
 const bcrypt =require('bcryptjs')
+
 class AlunoController {
   static async cadastrar(req, res) {
     try {
@@ -19,12 +20,14 @@ class AlunoController {
   }
   static async perfil(req, res) {
     try {
+      
       const { matricula } = req.usuario; // vindo do token
 
       // Busca mais dados se necessário
       const aluno = await Aluno.findOne({
         where: { matricula },
         attributes: ['nome', 'matricula', 'email'], // apenas os campos públicos
+        //          { exclude: "senha"} caso haja varias tabelas e relacionamentos
       });
 
       if (!aluno) {
