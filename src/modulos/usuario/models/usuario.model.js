@@ -1,13 +1,29 @@
 const { DataTypes } = require("sequelize");
 const { sequelize } = require("../../../config/configDB");
 
-const Aluno = sequelize.define(
-  "Aluno",
+const Usuario = sequelize.define(
+  "Usuario",
   {
     nome: {
-      type: DataTypes.STRING,
-      allowNull: false,
+      type: DataTypes.ENUM ("aluno", "professor", "secretario" ),
+      allowNull: false,  
+
+
     },
+    papel: {
+      type: DataTypes.ENUM("aluno", "professor", "secreatario"),
+      allowNull: false,
+      defaultValue: "aluno",
+      validate: {
+        validate: {
+          isIn: {
+            args: [["aluno", "professor", "secretario"]],    
+            msg: "O papel deve ser aluno, professor ou secretario",
+          },
+  
+        },
+      },    
+    
     matricula: {
       type: DataTypes.STRING,
       primaryKey: true,
@@ -37,11 +53,13 @@ const Aluno = sequelize.define(
       },
     },
   },
+},
   {
-    tableName: "aluno",
+    tableName: "usuarios",
     createdAt: "criado_em",
     updatedAt: "atualizado_em",
   }
+
 );
 
-module.exports = Aluno;
+module.exports = Usuario;
